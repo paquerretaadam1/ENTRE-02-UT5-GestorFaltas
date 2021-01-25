@@ -42,7 +42,7 @@ public class GestorFaltas {
             System.out.println("No se pueden añadir más alumnos, el curso está lleno.");
         }
         else if(buscarEstudiante(nuevo.getApellidos()) >= 0){
-            System.out.print("No se pueden añadir al alumno, sus apellidos ya están registrados.");
+            System.out.println("No se pueden añadir al alumno(" + nuevo.getApellidos() + "), sus apellidos ya están registrados.");
         }
         else{
             int i = 0;
@@ -101,6 +101,7 @@ public class GestorFaltas {
     public String toString() {
         StringBuilder strB = new StringBuilder();
         for(int i = 0; i < pos; i++){
+            strB.append("--------------" + "\n");
             strB.append(estudiantes[i].toString());
         }
         return strB.toString();
@@ -147,10 +148,14 @@ public class GestorFaltas {
      * aquellos estudiantes con 30 o más faltas injustificadas
      */
     public void anularMatricula() {
-        for(int i = 0; i < pos; i++){
+        int i = 0;
+        while( i < pos){
             if(estudiantes[i].getFaltasNoJustificadas() > 30){
                 System.arraycopy(estudiantes, i + 1, estudiantes, i, pos - i);
                 pos--;
+            }
+            else{
+                i++;
             }
         }
     }

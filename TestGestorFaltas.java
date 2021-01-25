@@ -8,17 +8,30 @@ public class TestGestorFaltas {
      * (ver enunciado)
      */
     public static void main(String[] args) {
-        GestorFaltas grupo = new GestorFaltas(5);
-        grupo.addEstudiante(new Estudiante("  ander ibai  ,  Ruiz Sena , 12, 23"));
-        grupo.addEstudiante(new Estudiante(" pedro josé   andrés  ,  Troya Baztarrica , 42, 6 "));
-        grupo.addEstudiante(new Estudiante("  Javier  ,  Suescun  Andreu , 39, 9 "));
-        grupo.addEstudiante(new Estudiante("julen, Duque Puyal, 5, 55"));
-        grupo.addEstudiante(new Estudiante("julen, Auque Puyal, 5, 54"));
-        System.out.println(grupo.toString());
-        System.out.println("---------------");
-        grupo.ordenar();
-        
-        System.out.println(grupo.toString());
+        if(args.length < 1){
+            System.out.println("Error en argumentos" + 
+                "Sintaxis: java TestGestorFaltas <max_estudiantes>");
+        }
+        else{
+            GestorFaltas grupo = new GestorFaltas(Integer.parseInt(args[0]));
+            grupo.leerDeFichero();
+            System.out.println(grupo.toString());
+            // Justificar faltas a iriso
+            if(grupo.buscarEstudiante("IRISO FLAMARIQUE ") > 0){
+                grupo.justificarFaltas("IRISO FLAMARIQUE ", 6);
+                System.out.println("Justificadas 6 faltas a IRISO FLAMARIQUE, Carla");
+            }
+            else{
+                System.out.println("No está la alumna");
+            }
+            //Ordenar en base a las faltas
+            grupo.ordenar();
+            System.out.println(grupo.toString()); 
+
+            //Eliminar 30+ faltas
+            grupo.anularMatricula();
+            System.out.println(grupo.toString());
+        }
     }
 
 }

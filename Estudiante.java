@@ -8,7 +8,6 @@ public class Estudiante {
     private String apellidos;
     private int faltasNoJustificadas;
     private int faltasJustificadas;
-    private int apercibimiento;
     /**
      *  
      *  Inicializa los atributos a partir de la información recibida
@@ -116,6 +115,26 @@ public class Estudiante {
     public void setFaltasJustificadas(int faltasJustificadas) {
         this.faltasJustificadas = faltasJustificadas;
     }
+    
+    /**
+     * 
+     */
+    public String apercibimientos(int injustificadas) {
+        StringBuilder strB = new StringBuilder("");
+        if(injustificadas < TipoApercibimiento.DIEZ.getMaximo()){
+            return "Sin apercibimientos";
+        }
+        if(injustificadas > TipoApercibimiento.DIEZ.getMaximo()){
+            strB.append("DIEZ ");
+        }
+        if(injustificadas > TipoApercibimiento.VEINTE.getMaximo()){
+            strB.append("VEINTE ");
+        }
+        if(injustificadas > TipoApercibimiento.TREINTA.getMaximo()){
+            strB.append("TREINTA");
+        }
+        return strB.toString();
+    }
 
     /**
      *  se justifican n faltas que hasta el momento eran injustificadas
@@ -157,7 +176,7 @@ public class Estudiante {
                 formateado = "Apercibimientos:";
                 break;
                 case 7:
-                formateado = "";
+                formateado = apercibimientos(this.faltasNoJustificadas);
                 break;
             }
 
@@ -175,7 +194,7 @@ public class Estudiante {
         System.out.println();
         Estudiante e2 = new Estudiante(
         " pedro josé   andrés  ,  Troya Baztarrica , 42, 6 ");
-        // System.out.println(e2);
+        System.out.println(e2);
         System.out.println();
         Estudiante e3 = new Estudiante("  Javier  ,  Suescun  Andreu , 39, 9 ");
         System.out.println(e3);

@@ -26,6 +26,13 @@ public class GestorFaltas {
     }
 
     /**
+     * 
+     */
+    public int numeroAlumnos() {
+        return pos;
+    }
+
+    /**
      *    Añade un nuevo estudiante solo si el curso no está completo y no existe ya otro
      *    estudiante igual (con los mismos apellidos). 
      *    Si no se puede añadir se muestra los mensajes adecuados 
@@ -75,6 +82,7 @@ public class GestorFaltas {
      *  
      */
     public int buscarEstudiante(String apellidos) {
+        apellidos = apellidos.toUpperCase().trim();
         int izquierda = 0;
         int derecha = pos - 1;
         while (izquierda <= derecha) {
@@ -82,7 +90,7 @@ public class GestorFaltas {
             if (estudiantes[mitad].getApellidos().equalsIgnoreCase(apellidos)) {
                 return mitad;
             }
-            else if (estudiantes[mitad].getApellidos().compareTo(apellidos.toUpperCase()) > 0) {
+            else if (estudiantes[mitad].getApellidos().compareTo(apellidos) > 0) {
                 derecha = mitad - 1;
             }
             else {
@@ -126,9 +134,9 @@ public class GestorFaltas {
      * Método de selección directa
      */
     public void ordenar() {
-        for (int i = pos - 1; i > 0; i--) {
+        for (int i = 0; i < pos - 1; i++) {
             int posmin = i;
-            for (int j = i - 1; j > 0; j--) {
+            for (int j = i + 1; j < pos; j++) {
                 if (estudiantes[j].getFaltasNoJustificadas() > estudiantes[posmin].getFaltasNoJustificadas()) {
                     posmin = j;
                 }
@@ -151,7 +159,7 @@ public class GestorFaltas {
         int i = 0;
         while( i < pos){
             if(estudiantes[i].getFaltasNoJustificadas() > 30){
-                System.arraycopy(estudiantes, i + 1, estudiantes, i, pos - i);
+                System.arraycopy(estudiantes, i + 1, estudiantes, i, pos - i - 1);
                 pos--;
             }
             else{

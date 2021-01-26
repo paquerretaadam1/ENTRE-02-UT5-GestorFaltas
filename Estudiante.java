@@ -43,11 +43,11 @@ public class Estudiante {
         resul.append(aFormatear[numeroNombres - 1].substring(1));
         return resul.toString();
     }
-
+    
     /**
      * 
      */
-    private String hacerApellidos(String apellidos) {
+    private String hacerApellidos(String apellidos) { 
         apellidos = apellidos.trim();
         StringBuilder resul = new StringBuilder("");
         String[] sinEspacios = apellidos.split(" ");
@@ -56,7 +56,7 @@ public class Estudiante {
                 resul.append(sinEspacios[i].toUpperCase() + " ") ;   
             }
         }
-        return resul.toString();
+        return resul.toString().trim();
     }
 
     /**

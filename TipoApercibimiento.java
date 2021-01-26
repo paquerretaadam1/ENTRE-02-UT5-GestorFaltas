@@ -14,7 +14,7 @@ public enum TipoApercibimiento{
     private int numero;
     
     private TipoApercibimiento(int numero){
-        this.numero = numero;
+        this.numero = numero; 
     }
 
     public int getMaximo(){
